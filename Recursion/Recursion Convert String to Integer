@@ -1,0 +1,33 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        // Your Code Here
+		Scanner sc=new Scanner(System.in);
+		String s=sc.next();
+		int sum=0;
+		System.out.println(Convert(s,s.length(),1,sum));
+    }
+	public static int Convert(String s,int len,int x,int sum){
+		// if(len<0){
+		// 	return sum;
+		if(s.length()==0){
+			return sum;
+		}
+		char ch=s.charAt(s.length()-1);
+		if(s.length()==len){
+			sum=Integer.parseInt(ch+"");
+			x=x*10;
+
+		}
+		else{
+			sum+=Integer.parseInt(ch+"")*x;
+			x=x*10;
+		}
+		s=s.substring(0,s.length()-1);
+		return Convert(s,len,x,sum);
+
+	
+		
+		
+	}
+}
