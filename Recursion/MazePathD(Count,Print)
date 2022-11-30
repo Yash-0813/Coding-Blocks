@@ -1,0 +1,30 @@
+import java.util.*;
+public class Main {
+	static int c = 0;
+    public static void main(String args[]) {
+        // Your Code Here
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int m = sc.nextInt();
+		maze_d(n , m , "" , 1 ,1 );
+		System.out.println("\n"+c);
+
+    }
+	public static void maze_d(int n ,int m , String s , int n1 , int m1){
+		if(n1 == n && m1 == m){
+			System.out.print(s+" ");
+			s = "";
+			c++;
+			return;
+		}
+		if(n1 < n){
+			maze_d(n , m , s+"V" , n1+1 , m1);
+		}
+		if(m1 < m){
+			maze_d(n , m , s+"H" , n1 , m1+1);
+		}
+		if(m1 < m && n1 < n){
+			maze_d(n , m, s+"D" , n1+1 , m1+1);
+		}
+	}
+}
