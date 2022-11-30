@@ -1,0 +1,62 @@
+import java.util.*;
+
+public class Main{
+    static int c= 0;
+
+    public static void main(String args[]) {
+        c= 0;
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        boolean[][] board = new boolean[n][n];
+        Knight(board, 0, 0, 0, n, "");
+        System.out.println("\n" + c);
+    }
+
+    private static void Knight(boolean[][] board, int row, int col, int kpsf, int tk, String ans) {
+        if (kpsf == tk) {
+            System.out.print(ans + " ");
+            c++;
+            return;
+        }
+
+        if (col == board[0].length) {
+            row++;
+            col = 0;
+        }
+        if (row == board.length) {
+            return;
+        }
+
+        if (isItSafeTheKnight(board, row, col)) {
+            board[row][col] = true;
+            Knight(board, row, col + 1, kpsf + 1, tk, ans + "{" + row + "-" + col + "} ");
+            board[row][col] = false;
+        }
+        Knight(board, row, col + 1, kpsf, tk, ans);
+    }
+
+    private static boolean isItSafeTheKnight(boolean[][] board, int row, int col) {
+        if (row - 2 >= 0 && col - 1 >= 0) {
+            if (board[row - 2][col - 1]) {
+                return false;
+            }
+        }
+        if (row - 2 >= 0 && col + 1 < board[0].length) {
+            if (board[row - 2][col + 1]) {
+                return false;
+            }
+        }
+        if (row - 1 >= 0 && col - 2 >= 0) {
+            if (board[row - 1][col - 2]) {
+                return false;
+            }
+        }
+        if (row - 1 >= 0 && col + 2 < board[0].length) {
+            if (board[row - 1][col + 2]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
