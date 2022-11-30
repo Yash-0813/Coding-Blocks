@@ -1,0 +1,36 @@
+import java.util.*;
+public class Main {
+	static int c = 0;
+    public static void main(String args[]) {
+        // Your Code Here
+		Scanner sc = new Scanner(System.in);
+		int n =sc.nextInt();
+		int a[] = new int[n];
+		for(int i = 0 ; i < n ; i++){
+			a[i] = sc.nextInt();
+		}
+		ArrayList<Integer> list = new ArrayList<>();
+		int target = sc.nextInt();
+		rec(a , 0 , n ,target , list);
+		System.out.println("\n"+c);
+    }
+	public static void rec(int [] a ,int idx, int n ,int target , ArrayList<Integer> list){
+		if(n == 0){
+			if(target == 0){
+				for(int i = 0 ; i < list.size() ; i++){
+					System.out.print(list.get(i)+" ");
+				}
+				System.out.print(" ");
+				c++;
+				
+			}
+			return;
+		}
+		list.add(a[idx]);
+		target = target - a[idx];
+		rec(a , idx+1, n-1, target , list);
+		list.remove(list.size()-1);
+		target = target + a[idx];
+		rec(a , idx+1 , n-1 , target , list);
+	}
+}
