@@ -1,0 +1,27 @@
+import java.util.*;
+public class Main {
+	static int c = 0;
+    public static void main(String args[]) {
+        // Your Code Here
+		Scanner sc=  new Scanner(System.in);
+		int target =sc.nextInt();
+		int n = sc.nextInt();
+		rec(n , target , "");
+		System.out.println("\n"+c);
+    }
+	public static void rec(int n , int target , String s){
+		if(target <= 0){
+			if(target == 0)
+			{
+				System.out.print(s+" ");
+				c++;
+			}
+			return;
+		}
+		for(int i = 1 ;i <= n ; i++){
+			// if(target > i){
+				rec(n, target-i,s+i);
+			// }
+		}
+	}
+}
