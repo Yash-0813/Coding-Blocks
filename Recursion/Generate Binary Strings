@@ -1,0 +1,34 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		while(n-->0){
+			String s=sc.next();
+			Wildcard(s.toCharArray(),0);
+			System.out.println();
+		}
+    }
+	public static void Wildcard(char[] s,int index){
+		if(index==s.length){
+			System.out.print(s);
+			System.out.print(" ");
+			
+			return;
+		}
+
+		if(s[index]=='?'){
+			s[index]='0';
+			Wildcard(s,index+1);
+
+			s[index]='1';
+			Wildcard(s,index+1);
+
+			s[index]='?';
+		}
+		else{
+			Wildcard(s,index+1);
+		}
+
+	}
+}
