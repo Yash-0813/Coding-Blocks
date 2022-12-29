@@ -1,0 +1,19 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        // Your Code Here
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		Stack<Integer>stack1=new Stack<>();
+		Stack<Integer>stack2=new Stack<>();
+		for(int i=0;i<n;i++){
+			stack1.push(i);
+		}
+		for(int i=0;i<n;i++){
+			stack2.push(stack1.pop());
+		}
+		for(int i=0;i<n;i++){
+			System.out.print(stack2.pop()+" ");
+		}
+    }
+}
