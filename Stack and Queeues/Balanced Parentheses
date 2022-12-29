@@ -1,0 +1,38 @@
+import java.util.*;
+public class Main {
+	public static void main(String[] args)
+	{
+		Scanner in = new Scanner(System.in);
+		String s=in.next();
+		Stack<Character> stack=new Stack<>();
+        for(Character currentchar:s.toCharArray()){
+            if(currentchar=='[' || currentchar=='(' || currentchar=='{'){
+                stack.push(currentchar);
+            }
+            else{
+                if(stack.isEmpty()){
+                    System.out.println("No");
+					return;
+                }
+                if(currentchar==')' && stack.peek()!='('){
+                    System.out.println("No");
+					return;
+                }
+                if(currentchar==']' && stack.peek()!='['){
+                    System.out.println("No");
+					return;
+                }
+                if(currentchar=='}' && stack.peek()!='{'){
+                    System.out.println("No");
+					return;
+                }
+                stack.pop();
+            }
+
+        }
+		if(stack.isEmpty())
+		System.out.println("Yes");
+
+	}
+
+}
