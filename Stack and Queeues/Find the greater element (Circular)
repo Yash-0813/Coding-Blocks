@@ -1,0 +1,29 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        // Your Code Here
+		Scanner sc=new Scanner(System.in);
+		int n = sc.nextInt();
+		int[]nums=new int[n];
+		for(int i=0;i<n;i++){
+			nums[i]=sc.nextInt();
+		}
+        Stack<Integer> st = new Stack<>();
+        int[] ans = new int[nums.length];
+        for(int i = (n*2)-1; i>=0; i--){
+            int currentval=nums[i%n];
+            while(!st.isEmpty() && currentval >= st.peek()){
+                st.pop();
+            }
+            if(i<n){
+                ans[i] = st.isEmpty() ? -1:st.peek();
+            }
+
+            st.push(currentval);
+        }
+
+        for(int i=0;i<ans.length;i++){
+			System.out.print(ans[i]+" ");
+		}
+    }
+}
