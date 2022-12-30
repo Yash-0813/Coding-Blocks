@@ -1,0 +1,35 @@
+import java.util.*;
+public class Main {
+
+	public static void main(String args[])  {
+		Stack<Integer> st = new Stack<>();
+        Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int[]price=new int[n];
+		for(int i=0;i<n;i++){
+			price[i]=sc.nextInt();
+		}
+		
+		int[] ans = new int[n]; 
+    
+        for(int i=0;i<n;i++){
+            while(!st.isEmpty() && price[i] >= price[st.peek()])
+                st.pop();
+            
+            if(st.isEmpty())
+                ans[i] = i+1;
+            else
+                ans[i] = i - st.peek();
+                
+            st.push(i);
+            
+        }
+        for(int i=0;i<n;i++){
+			System.out.print(ans[i]+" ");
+		}
+		System.out.print("END");
+	
+
+	}
+
+}
