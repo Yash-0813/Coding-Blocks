@@ -1,0 +1,73 @@
+import java.util.*;
+
+public class Main {
+
+ public static void main(String[] args) {
+  primeSieve();
+  Scanner scn = new Scanner(System.in);
+  int arr = scn.nextInt();
+  int p = scn.nextInt();
+  int a[] = new int[arr];
+  for (int i = 0; i < a.length; i++) {
+   a[i] = scn.nextInt();
+  }
+  Cards(a, p);
+ }
+
+ public static void Cards(int[] a, int p) {
+  Stack<Integer> stack = new Stack<>();
+  for (int arrber : a) {
+   stack.push(arrber);
+  }
+  Stack<Integer> stack1 = new Stack<>();
+  Stack<Integer> stA = new Stack<>();
+  for (int i = 0; i < p; i++) {
+   if (stack.isEmpty()) {
+    break;
+   }
+   int prime = l.get(i);
+   while (!stack.isEmpty()) {
+    int element = stack.pop();
+    if (element % prime == 0) {
+     stack1.push(element);
+    } else {
+     stA.push(element);
+    }
+   }
+
+   while (!stack1.empty()) {
+    System.out.println(stack1.pop());
+   }
+   stack = stA;
+   while (!stA.empty())
+    stA = new Stack<>();
+  }
+  while (!stack.empty()) {
+   System.out.println(stack.pop());
+  }
+ }
+
+ static ArrayList<Integer> l = new ArrayList<>();
+
+ public static void primeSieve() {
+  int num= 10000000;
+  boolean[] prime = new boolean[num+ 1];
+  prime[0] = true; // not prime
+  prime[1] = true; // not prime
+  for (int i = 2; i * i <= num; i++) {
+   if (!prime[i]) { // if i prime hai tab
+    for (int mult = 2; mult * i <= num; mult++) {
+     prime[i * mult] = true; // not prime
+    }
+   }
+  }
+
+  for (int i = 2; i <= num; i++) {
+   if (!prime[i]) {
+    l.add(i);
+   }
+  }
+
+ }
+
+}
