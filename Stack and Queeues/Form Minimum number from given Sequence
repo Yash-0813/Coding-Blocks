@@ -1,0 +1,28 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    while(n-->0){
+      String s = sc.next();
+      String result= "";
+          String smallres= "1";
+          int value= 2;
+          for(int i=0;i<s.length();i++){
+              if(s.charAt(i) == 'D'){
+                  smallres = value+ smallres;
+                  value++;
+              }
+              else if(s.charAt(i) == 'I'){
+                  result+= smallres;
+                  smallres = "";
+                  smallres += value;
+                  value++;
+              }
+            
+          }
+          result+= smallres;
+          System.out.println(result);
+    }
+    }
+}
