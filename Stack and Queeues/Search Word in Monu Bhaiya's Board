@@ -1,0 +1,46 @@
+import java.util.*;
+public class Main {
+    public static void main (String args[]) {
+        Scanner scn=new Scanner(System.in);
+        int n=scn.nextInt();
+        int array=scn.nextInt();
+        int l=scn.nextInt();
+        char ar1[][]=new char[n][];
+        for(int a=0;a<ar1.length;a++)
+            ar1[a]=scn.next().toCharArray();
+        String helper[]=new String[l];
+        for(int a=0;a<helper.length;a++)
+            helper[a]=scn.next();
+        Arrays.sort(helper);
+        for(int a=0;a<helper.length;a++){
+            int variable=0;
+        for(int p=0;p<ar1.length;p++){
+            for(int b=0;b<ar1[p].length;b++){
+                if(ar1[p][b]==helper[a].charAt(0))
+                    if(Method(ar1,helper[a],p,b,0)){
+                        System.out.print(helper[a]+" ");
+                        variable=1;
+                        break;
+                    }
+                }
+                if(variable==1)
+                    break;
+            }
+        }
+    }
+    public static boolean Method(char ar[][],String str,int a,int b,int c)
+    {
+        if(c==str.length())
+            return true;
+        if(a<0||b<0||a>=ar.length||b>=ar[0].length||ar[a][b]!=str.charAt(c))
+            return false;
+        char chr=ar[a][b];
+        ar[a][b]='.';
+        boolean var = Method(ar,str,a+1,b,c+1);
+        boolean var1 = Method(ar,str,a,b-1,c+1);
+        boolean var2 = Method(ar,str,a-1,b,c+1);
+        boolean var3 = Method(ar,str,a,b+1,c+1);
+        ar[a][b] = chr;
+        return var || var2 || var3 || var1; 
+    }
+}
