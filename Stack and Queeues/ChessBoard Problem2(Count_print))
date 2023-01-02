@@ -1,0 +1,62 @@
+import java.util.*;
+public class Main {
+ static HashSet<Integer> memo1;
+ static HashSet<Integer> memo2;
+ static int cr;
+    public static void main(String args[]) {
+  		cr=0;
+        Scanner sc=new Scanner(System.in);
+  int array=sc.nextInt();
+  memo1=new HashSet<>();
+  memo2=new HashSet<>();
+  Method(array);
+  help(array,0,0,"");
+  System.out.println("\n"+cr);
+    }
+ public static void help(int array,int i,int j,String strrrr)
+ {
+  if(i<0||j<0||i>=array||j>=array)
+   return;
+  if(i==array-1&&j==array-1)
+  {
+   cr++;
+   System.out.print(strrrr+'{'+i+'-'+j+"} ");
+   return;
+  }
+  if(memo1.contains(array*i+j+1))
+   return;
+  if(memo2.contains(array*i+j+1))
+  {
+   help(array,array-1,array-1,  strrrr+'{'+i+'-' + j+ "}P");
+  }
+  help(array,i+2,j+1, strrrr+'{'+i+'-' + j+ "}K" );
+  help(array,i+1,j+2, strrrr+'{'+i+'-' + j+ "}K" );
+  if(i==0||j==0||i==array-1||j==array-1)
+  {
+   for(int z=1;z<array;z++)
+    help(array,i,j+z, strrrr+'{'+i+'-' + j+ "}R" );
+   for(int z=1;z<array;z++)
+    help(array,i+z,j, strrrr+'{'+i+'-' + j+ "}R" );
+  }
+   if(i==j||i+j==array-1)
+   for(int z=0;z<array;z++)
+    help(array,i+z+1,j+1+z,strrrr+ '{'+i+'-' + j+ "}B" );
+ }
+ public static void Method(int array)
+ {
+  boolean ar1[]=new boolean[array*array+1];
+  for(int i=2;i<ar1.length;i++)
+   if(!ar1[i])
+   for(int j=i*i;j<ar1.length;j+=i)
+    ar1[j]=true;
+  boolean bool=true;
+  for(int i=2;i<ar1.length;i++){
+  if(!ar1[i]&&bool)
+   memo1.add(i);
+  else if(!ar1[i])
+   memo2.add(i); 
+  if(!ar1[i])
+  bool=!bool;
+  }
+ }
+}
