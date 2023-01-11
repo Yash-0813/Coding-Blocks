@@ -1,0 +1,43 @@
+import java.util.*;
+public class Main {
+    public static void main (String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int num1= sc.nextInt();
+		int num2= sc.nextInt();
+		int[] arr1 = new int[num1];
+		int[] arr2 = new int[num2];
+		for(int i=0; i<num1; i++) {
+			arr1[i] = sc.nextInt();
+		}
+		for(int i=0; i<num2; i++) {
+			arr2[i] = sc.nextInt();
+		}
+		int i = num1-1, j= num2-1;
+		int sum = 0;
+		int carry = 0;
+		ArrayList<Integer> list= new ArrayList<>();
+		while(i>=0 && j>=0){
+			int temp= arr1[i] +arr2[j]+carry;
+			carry = temp/10;
+			list.add(temp%10);
+			i--;
+			j--;
+		} 
+		while(i>=0){
+			int k = arr1[i] +carry;
+			carry = k/10;
+			list.add(k%10);
+			i--;
+		}
+		while(j>=0){
+			int k = arr2[i] + carry;
+			carry = k/10;
+			list.add(k%10);
+			j--;
+		}
+		if(carry>0) list.add(carry);
+		for(int x= list.size()-1; x>=0; x--){
+			System.out.print(list.get(x) + " ");
+		}
+	}
+}
