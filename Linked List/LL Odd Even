@@ -1,0 +1,77 @@
+import java.util.*;
+
+public class Main {
+  static Node head;
+
+    static class Node{
+        int data;
+        Node next;
+
+        public Node(int data){
+            this.data=data;
+            this.next=null;
+
+        }
+    }
+    public static void main (String args[]) {
+    Scanner sc = new Scanner(System.in);
+    Main list = new Main();
+    int N= sc.nextInt();
+    for(int i=0;i<N;i++){
+      list.addLast(sc.nextInt());
+    }
+      Node tempNode= divideTwo(N,head);
+          while(tempNode!= null){
+      System.out.print(tempNode.data +" ");
+      tempNode= tempNode.next;
+      }
+    
+    }
+
+  public void addLast(int data){
+        Node newNode = new Node(data);
+        if(head == null){    //list is empty
+            head = newNode;
+            return;
+        }
+        Node tempNode= head;
+        while(tempNode.next != null){
+            tempNode=tempNode.next;
+        }
+        tempNode.next = newNode;
+
+    }
+
+  static Node divideTwo(int N, Node head){
+        // code here
+        Node oddDummyNode=new Node(-1);
+		Node evenDummyNode=new Node(-1);
+
+		Node current1=oddDummyNode;
+		Node current2=evenDummyNode;
+
+		boolean oddpos=true;
+
+		Node current=head;
+		while(current!=null){
+			if(oddpos==true){
+				//Node newNode=new Node(current.data);
+				current1.next=current;
+				//current1=newNode;
+				oddpos=false;
+			}
+			else{
+				//Node newNode=new Node(current.data);
+				current2.next=current;
+				//current2=newNode;
+				oddpos=true;
+			}
+			current=current.next;
+		}
+		current1.next=evenDummyNode.next;
+		current2.next=null;
+        return oddDummyNode.next;
+
+  }
+
+}
