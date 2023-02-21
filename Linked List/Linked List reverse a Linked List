@@ -1,0 +1,61 @@
+import java.util.*;
+
+public class Main{
+  static Node head;
+
+    static class Node{
+        int data;
+        Node next;
+
+        public Node(int data){
+            this.data=data;
+            this.next=null;
+
+        }
+  }
+
+  public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    Main list = new Main();
+    int n = sc.nextInt();
+      while(n-->0){
+        list.addLast(sc.nextInt());
+        }
+    Node temp = reverseList(head);
+  
+         while(temp != null){
+        System.out.print(temp.data +" ");
+          temp = temp.next;
+      }
+  }
+
+  static void addLast(int data){
+        Node newNode = new Node(data);
+        if(head == null){    //list is empty
+            head = newNode;
+            return;
+        }
+        Node tempNode= head;
+        while(tempNode.next != null){
+            tempNode=tempNode.next;
+        }
+        tempNode.next = newNode;
+
+    }
+
+  static Node reverseList(Node node)
+    {
+        Node prev = null;
+        Node current = node;
+        Node tempNode= null;
+        while (current != null) {
+            tempNode= current.next;
+            current.next = prev;
+            prev = current;
+            current = tempNode;
+        }
+        //node = prev;
+        return prev;
+    }
+
+}
