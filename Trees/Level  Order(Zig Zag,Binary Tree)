@@ -1,0 +1,97 @@
+import java.util.*;
+public class Main {
+
+	static Scanner scn = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		Main m = new Main();
+		BinaryTree bt = m.new BinaryTree();
+		List<List<Integer>> ans=bt.levelOrderZigZag();
+		 for(int i=0;i<ans.size();i++)
+          {
+               for(int j=0;j<ans.get(i).size();j++)
+               {
+                    System.out.print(ans.get(i).get(j)+" ");
+               }
+		  }
+          
+	}
+
+	private class BinaryTree {
+		private class Node {
+			int data;
+			Node left;
+			Node right;
+		}
+
+		private Node root;
+		private int size;
+
+		public BinaryTree() {
+			this.root = this.takeInput(null, false);
+		}
+
+		public Node takeInput(Node parent, boolean ilc) {
+
+			int cdata = scn.nextInt();
+			Node child = new Node();
+			child.data = cdata;
+			this.size++;
+
+			// left
+			boolean hlc = scn.nextBoolean();
+
+			if (hlc) {
+				child.left = this.takeInput(child, true);
+			}
+
+			// right
+			boolean hrc = scn.nextBoolean();
+
+			if (hrc) {
+				child.right = this.takeInput(child, false);
+			}
+
+			// return
+			return child;
+		}
+
+		public List<List<Integer>> levelOrderZigZag() {
+			
+			if (root == null) {
+            return new ArrayList<>();
+        }
+
+        boolean left = true;
+        Queue<Node> queue= new LinkedList<>();
+        List<List<Integer>>temp= new ArrayList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> tarp = new ArrayList<>();
+            while (size != 0) {
+                Node currentnode = queue.remove();
+                tarp.add(currentnode.data);
+
+                if (currentnode.left != null) {
+                    queue.add(currentnode.left);
+                }
+                if (currentnode.right != null) {
+                    queue.add(currentnode.right);
+                }
+                size--;
+            }
+
+            if (!left) {
+                Collections.reverse(tarp);
+            }
+            left = !left;
+            temp.add(tarp);
+        }
+		
+		return temp;
+		}
+
+	}
+
+}
