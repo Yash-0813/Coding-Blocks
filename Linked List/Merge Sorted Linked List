@@ -1,0 +1,48 @@
+import java.util.*;
+
+public class Main{
+  public static void main(String[] args){
+    Scanner scan= new Scanner(System.in);
+    int t=scan.nextInt();
+    while(t-->0){
+      int n = scan.nextInt();
+      int[] arr1 = new int[n];
+      for(int i=0;i<n;i++){
+        arr1[i] = scan.nextInt();
+      }
+      int m = scan.nextInt();
+      int[] arr2 = new int[m];
+      for(int i=0;i<m;i++){
+        arr2[i] = scan.nextInt();
+      }
+
+      int[] ans = new int[n+m];
+      merge2Arrays(arr1,arr2,n,m,ans);
+      for(int i:ans){
+        System.out.print(i+" ");
+      }
+
+      System.out.println();
+    }
+  }
+
+     public static void merge2Arrays(int[] arr, int[] arr1, int n1, int n2, int[] ans){
+        int i = 0; 
+        int j = 0; 
+        int k = 0; 
+         
+        // traverse the arr1 and insert its element in arr3
+        while(i < n1){  
+         ans[k++] = arr[i++];  
+        }  
+         
+        // now traverse arr2 and insert in arr3
+        while(j < n2){  
+         ans[k++] = arr1[j++];  
+        }  
+         
+        // sort the whole array arr3
+        Arrays.sort(ans);  
+    }
+  
+}
