@@ -1,0 +1,96 @@
+import java.util.*;
+public class Main {
+
+	static Scanner scn = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		Main m = new Main();
+		BinaryTree bt1 = m.new BinaryTree();
+		System.out.println(bt1.levelArrayList());
+	}
+
+	private class BinaryTree {
+		private class Node {
+			int data;
+			Node left;
+			Node right;
+		}
+
+		private Node root;
+		private int size;
+
+		public BinaryTree() {
+			this.root = this.takeInput(null, false);
+		}
+
+		public Node takeInput(Node parent, boolean ilc) {
+
+			int cdata = scn.nextInt();
+			Node child = new Node();
+			child.data = cdata;
+			this.size++;
+
+			// left
+			boolean hlc = scn.nextBoolean();
+
+			if (hlc) {
+				child.left = this.takeInput(child, true);
+			}
+
+			// right
+			boolean hrc = scn.nextBoolean();
+
+			if (hrc) {
+				child.right = this.takeInput(child, false);
+			}
+
+			// return
+			return child;
+		}
+
+		public ArrayList<ArrayList<Integer>> levelArrayList() {
+
+			// write your code here
+			ArrayList<ArrayList<Integer>>answer=new ArrayList<>();
+        Queue<Node>queue=new LinkedList<>();
+
+        if(root==null){
+            return answer;
+        }
+
+        //add something
+        queue.add(root);
+
+        //rstarting bfs
+        while(!queue.isEmpty()){
+
+            //find the size pf queue will tell us no.of node at particular level
+            int currentSize=queue.size();
+
+            //process these operation(remove,do something,process children)currentsize times
+            ArrayList<Integer>currentLevel=new ArrayList<>();
+
+            while(currentSize>0){
+                Node currentNode=queue.poll();
+                currentLevel.add(currentNode.data);
+
+                //process children
+
+                if(currentNode.left!=null){
+                    queue.add(currentNode.left);
+                }
+
+                if(currentNode.right!=null){
+                    queue.add(currentNode.right);
+                }
+                currentSize-=1;
+            }
+            answer.add(currentLevel);
+
+        }
+        return answer;
+		}
+
+	}
+
+}
