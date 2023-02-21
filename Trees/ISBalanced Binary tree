@@ -1,0 +1,83 @@
+import java.util.*;
+public class Main {
+
+  static Scanner scn = new Scanner(System.in);
+    static boolean check = true;
+
+  public static void main(String[] args) {
+    Main m = new Main();
+    BinaryTree bt = m.new BinaryTree();
+    System.out.println(bt.isBalanced());
+  }
+
+  private class BinaryTree {
+    private class Node {
+      int data;
+      Node left;
+      Node right;
+    }
+
+    private Node root;
+    private int size;
+
+    public BinaryTree() {
+      this.root = this.takeInput(null, false);
+    }
+
+    public Node takeInput(Node parent, boolean ilc) {
+
+      int cdata = scn.nextInt();
+      Node child = new Node();
+      child.data = cdata;
+      this.size++;
+
+      // left
+      boolean hlc = scn.nextBoolean();
+
+      if (hlc) {
+        child.left = this.takeInput(child, true);
+      }
+
+      // right
+      boolean hrc = scn.nextBoolean();
+
+      if (hrc) {
+        child.right = this.takeInput(child, false);
+      }
+
+      // return
+      return child;
+    }
+
+    public boolean isBalanced() {
+      return this.isBalanced(this.root).isBalanced;
+    }
+
+    private BalancedPair isBalanced(Node node) {
+      // write your code here
+            BalancedPair pair = new BalancedPair();
+            pair.height = balancecheck(root,0);
+            pair.isBalanced = check;
+            return pair;
+        }
+
+        private int balancecheck(Node root,int depth){
+            if(root == null)
+                return depth;
+            
+            int left= balancecheck(root.left,depth+1);
+            int right= balancecheck(root.right,depth+1);
+
+            if(Math.abs(left-right)>1)
+                check = false;
+            
+            return Math.max(left,right);
+        }
+
+    private class BalancedPair {
+      int height;
+      boolean isBalanced;
+    }
+
+  }
+}
