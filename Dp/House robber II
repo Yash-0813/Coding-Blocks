@@ -1,0 +1,38 @@
+import java.util.*;
+public class Main {
+    public static void main (String args[]) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[]nums=new int[n];
+        for(int i=0;i<n;i++){
+            nums[i]=sc.nextInt();
+        }
+        System.out.println(rob(nums));
+    }
+    public static int rob(int[] nums) {
+        int n = nums.length;
+        int[] dp = new int[n+1];
+        Arrays.fill(dp,-1);
+
+        if(nums.length==1){
+            return nums[0];
+        }
+
+        return Math.max(maxcost(nums,0,nums.length-2,dp),maxcost(nums,1,nums.length-1,dp));
+    }
+    public static int maxcost(int[] nums,int curr,int len,int[] dp){
+        if(curr>len)
+            return 0;
+            
+        if(curr==len)
+            return nums[curr];
+
+        if(dp[curr] != -1)
+            return dp[curr];
+        
+        int rob = nums[curr] + maxcost(nums,curr+2,len,dp);
+        int norob = maxcost(nums,curr+1,len,dp);
+
+        return dp[curr] = Math.max(rob,norob);
+    }
+}
