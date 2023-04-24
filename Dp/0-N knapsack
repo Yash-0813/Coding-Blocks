@@ -1,0 +1,55 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int capacity=sc.nextInt();
+		int[]weight=new int[n];
+		for(int i=0;i<n;i++){
+			weight[i]=sc.nextInt();
+		}
+		int[]value=new int[n];
+		for(int i=0;i<n;i++){
+			value[i]=sc.nextInt();
+		}
+		System.out.println(knapSack(n,capacity,value,weight));
+
+    }
+	static int knapSack(int N, int capacity, int val[], int wt[])
+    {
+        // code here
+        int[][] dp=new int[N][capacity+1];
+        for(int i=0;i<N;i++){
+            for(int j=0;j<capacity+1;j++){
+                dp[i][j]=-1;
+            }
+        }
+        return maxProfit(wt,val,0,capacity,N,dp);
+    }
+    private static int maxProfit(int[]wt,int[]val,int currentItem,int capacity,int N,int[][]dp){
+        if(capacity==0) return 0;
+        if(currentItem==N) return 0;
+        
+        int currentItemWeight=wt[currentItem];
+        int currentItemProfit=val[currentItem];
+        
+        //String currentKey=Integer.toString(currentItem)+"-"+Integer.toString(capacity);
+        
+        //if(memo.containsKey(currentKey))
+        //return memo.get(currentKey); 
+        if(dp[currentItem][capacity]!=-1)
+        return dp[currentItem][capacity];
+        
+        
+        int consider =0;
+        if(currentItemWeight<=capacity){
+            consider=currentItemProfit+maxProfit(wt,val,currentItem,capacity-currentItemWeight,N,dp);
+        }
+        int notConsider=maxProfit(wt,val,currentItem+1,capacity,N,dp);
+        //memo.put(currentKey,Math.max(consider,notConsider));
+        
+        dp[currentItem][capacity]=Math.max(consider,notConsider);
+        return dp[currentItem][capacity];
+        
+    }
+}
