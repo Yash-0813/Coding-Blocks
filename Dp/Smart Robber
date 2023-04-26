@@ -1,42 +1,47 @@
-import java.util.*;
-public class Main {
-    public static void main (String args[]) {
-		Scanner sc=new Scanner(System.in);
-		int t=sc.nextInt();
-		while(t-->0){
-			int n=sc.nextInt();
-			int[]money=new int[n];
-			for(int i=0;i<n;i++){
-				money[i]=sc.nextInt();
-			}
-
-			System.out.println(rob(money));
-
-
-		}
-
+import java.util.*; 
+public class Main { 
+    public static void main (String args[]) { 
+  Scanner sc = new Scanner(System.in); 
+   int t = sc.nextInt(); 
+   while(t-->0) 
+   { 
+   int n = sc.nextInt(); 
+   int house[] = new int[n]; 
+   for(int i=0;i<n;i++) 
+   { 
+    house[i] = sc.nextInt();     
+   } 
+   int dp[] = new int[n+1]; 
+   Arrays.fill(dp,-1); 
+   System.out.println(maxTheft(house,n-1,dp)); 
+     
+ 
+ 
+   } 
+ } 
+   public static int maxTheft(int house[],int n,int dp[]) 
+   { 
+    if(n<0) 
+    { 
+     return 0; 
+ 
+    } 
+    if(n==0) 
+    { 
+     return house[0]; 
+    } 
+    if(dp[n]!=-1) 
+    { 
+     return dp[n]; 
+    } 
+    int picking = house[n]+maxTheft(house,n-2,dp); 
+    int notpicking = maxTheft(house,n-1,dp); 
+ 
+    return dp[n]=Math.max(picking,notpicking); 
+ 
+ 
+   } 
+ 
+   
+ 
     }
-	public static int rob(int[] nums) {
-        int[] dp=new int[nums.length];
-        Arrays.fill(dp,-1);
-        return maxTheft(nums,0,dp);
-    }
-
-    private static int maxTheft(int[] nums,int currentHouse,int[] dp){
-        if(currentHouse>nums.length-1){
-            return 0;
-        }
-
-        if(dp[currentHouse]!=-1){
-            return dp[currentHouse];
-        }
-
-
-        int notrobhouse=maxTheft(nums,currentHouse+1,dp);
-        int robhouse=nums[currentHouse]+maxTheft(nums,currentHouse+2,dp);
-
-
-        dp[currentHouse]=Math.max(notrobhouse,robhouse);
-        return dp[currentHouse];
-}
-}
