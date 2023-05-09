@@ -1,0 +1,40 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+      Scanner scan=new Scanner(System.in);
+   int test=scan.nextInt();
+   while(test-->0){
+    int n=scan.nextInt();
+    System.out.println(find(n));
+   }
+    }
+ public static long find(int n){
+  long dp[][]=new long[n][2];
+  long ans=0;
+  for(int i=0;i<n;i++){
+   dp[i][0]=-1;
+   dp[i][1]=-1;
+  }
+  dp[0][0]=1;
+  dp[0][1]=1;
+
+  ans=noofbinarys(n-1,0,dp);
+  ans=ans+noofbinarys(n-1,1,dp);
+  return ans;
+ }
+ public static long noofbinarys(int idx,int currb,long [][]dp){
+  if(idx==0){
+   return dp[idx][currb];
+  }
+  if(dp[idx][currb]!=-1){
+   return dp[idx][currb];
+  }
+  if(currb==0){
+   dp[idx][currb]= noofbinarys(idx-1,0,dp)+noofbinarys(idx-1,1,dp);
+  }
+  else if(currb==1){
+   dp[idx][currb]=noofbinarys(idx-1,0,dp);
+  }
+  return dp[idx][currb];
+ }
+}
