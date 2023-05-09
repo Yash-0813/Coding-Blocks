@@ -1,0 +1,30 @@
+import java.util.*;
+public class Main {    
+	private static int find(int k, int n, int[][] dp) {
+        if (k == 1 || n == 0 || n == 1) {
+            return n;
+        }
+        if (dp[k][n] != 0) 
+            return dp[k][n];
+        int mint = Integer.MAX_VALUE;
+        for (int i = 1; i <= n; i++) {
+            int m1 = find(k-1, i-1, dp);
+            int m2 = find(k, n-i, dp);
+            int m3 = Math.max(m1, m2);
+            mint = Math.min(mint, m3 + 1);
+        }
+        dp[k][n] = mint;
+        return mint;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            int k = sc.nextInt();
+            int n = sc.nextInt();
+            int[][] dp = new int[k+1][n+1];
+            System.out.println(find(k, n, dp));
+        }
+    }
+
+}
