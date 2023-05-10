@@ -1,0 +1,48 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+  Scanner scn= new Scanner(System.in);
+  int n = scn.nextInt();
+  int[][] l= new int[n][n];
+  for(int i=0;i<n;i++){
+   for(int j=0;j<n;j++){
+    l[i][j] = scn.nextInt();
+   }
+  }
+  int ans=helping(l,n,0,0);
+  System.out.println(ans);
+    }
+ public static int helping(int[][] b,int n,int r,int c){
+  if(r < 0 || r >= n || c < 0 || c >= n || b[r][c] == -1 || b[r][c] == 0){
+   int notvis = 0;
+   for(int i=0;i<n;i++){
+    for(int j=0;j<n;j++){
+     if(b[i][j] == 1)
+     {
+      notvis++;
+     }
+    }
+   }
+   return notvis;
+  }
+  int[] moves = new int[8];
+  b[r][c] = -1;
+  moves[0] = helping(b,n,r-2,c+1);
+  moves[1] = helping(b,n,r-2,c-1);
+  moves[2] = helping(b,n,r-1,c+2);
+  moves[3] = helping(b,n,r+1,c+2);
+  moves[4] = helping(b,n,r+2,c+1);
+  moves[5] = helping(b,n,r+2,c-1);
+  moves[6] = helping(b,n,r-1,c-2);
+  moves[7] = helping(b,n,r+1,c-2);
+        b[r][c] = 1;
+  int m = Integer.MAX_VALUE;
+  for(int i=0;i<8;i++){
+   if(moves[i] < m)
+   {
+    m = moves[i];
+   }
+  }
+  return m; 
+ }
+}
