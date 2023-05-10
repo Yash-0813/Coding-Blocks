@@ -1,0 +1,28 @@
+import java.util.*;
+public class Main {
+    public static void main (String args[]) {
+  	Scanner scn= new Scanner(System.in);
+  	String s = scn.next();
+  	PmcHelper(s, 0, "");
+    }
+
+ public static void PmcHelper(String str, int i, String required) {
+  if(i==str.length()) {
+   System.out.print(required + " ");
+   return;
+  }
+
+  char ch = str.charAt(i);
+  if(ch >= 'a' && ch <= 'z')  {
+   PmcHelper(str, i+1, required+ch);
+   ch = (char) (ch - 32);
+   PmcHelper(str, i+1, required+ch);
+  } else if(ch >= 'A' && ch <= 'Z') {
+   char smallCh = (char)(ch + 32);
+   PmcHelper(str, i+1, required+smallCh);
+   PmcHelper(str, i+1, required+ch);
+  } else {
+   PmcHelper(str, i+1, required+ch);
+  }
+ }
+}
