@@ -1,0 +1,46 @@
+import java.util.*;
+public class Main {
+	public static void main(String [] arg)
+	{
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		Stack<Integer> stack = new Stack<>();
+		while(n>0)
+		{
+			int val=sc.nextInt();
+			stack.push(val);
+			n--;
+		}
+		reverse(stack);
+		while(!stack.isEmpty())
+		{
+			System.out.println(stack.pop());
+		}
+		
+	}
+	private static void insert(Stack<Integer> stack,int e)
+	{
+		if(stack.isEmpty())
+		{
+			stack.push(e);
+			return;
+		}
+		int ei=stack.pop();
+		insert(stack,e);
+		stack.push(ei);
+
+	}
+	private static void reverse(Stack<Integer>stack)
+	{
+		if(stack.isEmpty())
+		{
+			return;
+		}
+		int e=stack.pop();
+		reverse(stack);
+		insert(stack,e);
+	}
+	
+	
+
+}
