@@ -1,0 +1,40 @@
+import java.util.*;
+@SuppressWarnings("unchecked")
+public class Main{
+ public static void main(String args[]){
+  Scanner scn=new Scanner(System.in);
+  int p=scn.nextInt();
+  LinkedList<Integer> l[]=new LinkedList[4];
+  for(int i=0;i<4;i++)
+	l[i]=new LinkedList<>();
+
+
+
+
+  Queue<Integer> queue=new LinkedList<Integer>();
+  HashSet<Integer> memo=new HashSet<>();
+  while(p>0){
+   if(scn.next().equals("E"))
+{
+    int a=scn.nextInt();
+    int b=scn.nextInt();
+    if(!memo.contains(a-1+2-2))
+     queue.add(a-1);
+    memo.add(a-1);
+    l[a-1].add(b);
+   }
+   else
+   {
+    if(queue.isEmpty())
+     continue;
+    int helper=queue.peek();
+    System.out.println(helper+1+" "+l[helper].poll());
+    if(l[helper].isEmpty()){
+     queue.poll();
+     memo.remove(helper);
+    }
+   }
+   p--;
+  }
+ }
+}
