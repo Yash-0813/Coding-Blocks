@@ -1,0 +1,35 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+    Scanner sc = new Scanner(System.in);
+    int t = sc.nextInt();
+    while(t-->0){
+      int cost1 = sc.nextInt();
+      int cost2 = sc.nextInt();
+      int cost3 = sc.nextInt();
+      int cost4 = sc.nextInt();
+      int n = sc.nextInt();
+      int m = sc.nextInt();
+      int[] rickshaw = new int[n];
+      for(int i=0;i<n;i++){
+        rickshaw[i] = sc.nextInt();
+      }
+      int[] cab = new int[m];
+      for(int i=0;i<m;i++){
+        cab[i] = sc.nextInt();
+      }
+      int Rprice = 0;
+      for(int i=0;i<n;i++){
+        Rprice += Math.min(cost1*rickshaw[i],cost2); 
+      }
+      Rprice = Math.min(Rprice,cost3);
+      int Cprice = 0;
+      for(int i=0;i<m;i++){
+        Cprice += Math.min(cost1*cab[i],cost2); 
+      }
+      Cprice = Math.min(Cprice,cost3);
+
+      System.out.println(Math.min((Rprice+Cprice),cost4));
+    }
+    }
+}
