@@ -1,0 +1,18 @@
+import java.util.*;
+public class Main{
+    public static void main(String[]args){
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        System.out.println(countarranegments(n));
+    }
+    private static int countarranegments(int n){
+        if(n==1){
+            return 0;
+        }
+        if(n==2){
+            return 1;
+        }
+        return (n-1)*(countarranegments(n-1)+countarranegments(n-2));
+
+    }
+}
