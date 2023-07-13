@@ -1,0 +1,22 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        // Your Code Here
+		Scanner sc=new Scanner(System.in);
+		String s=sc.next();
+		HashMap<Character,Integer> memo=new HashMap<>();
+		for(char i:s.toCharArray()){
+			memo.put(i,memo.getOrDefault(i,0)+1);
+		}
+		int max = -1;
+		int ans = -1;
+		for(Map.Entry<Character , Integer> entry : memo.entrySet()){
+			if(entry.getValue() > max ){
+				max = entry.getValue();
+				ans  = entry.getKey();
+			}
+		}
+		System.out.println((char)ans);
+		
+    }
+}
