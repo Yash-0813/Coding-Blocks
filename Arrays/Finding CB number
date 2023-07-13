@@ -1,0 +1,49 @@
+import java.util.*;
+public class Main 
+{
+    public static void main(String args[]) {
+       Scanner sc=new Scanner(System.in);
+	   int n=sc.nextInt();
+	   String s=sc.next();
+	   boolean visit[]=new boolean[s.length()];
+	   int count=0;
+	   for(int len=1;len<=s.length();len++)
+	   {
+		   for(int pos=0;pos<=s.length()-len;pos++)
+		   {
+			   int end=pos+len;
+			   String str=s.substring(pos,end);
+			   if(check(Long.valueOf(str),pos,end)&&isValid(visit,pos,end))
+			   {
+				   count++;
+				   for(int k=pos;k<end;k++)
+				    visit[k]=true;
+			   }
+		   }
+	   }
+	   System.out.print(count);
+    }
+	public static boolean check(long  num,int start,int end)
+	{
+		if(num==0 || num==1)return false;
+		int x[]={2,3,5,7,11,13,17,19,23,29};
+		for(int i=0;i<10;i++)
+		{
+			if(num==(long)x[i])return true;
+		}
+		for(int i=0;i<10;i++)
+		{
+			if(num%x[i]==0)return false;
+		}
+		return true;
+	}
+	public static boolean isValid(boolean visited[],int start,int end)
+	{
+		for(int i=start;i<end;i++)
+		{
+			if(visited[i])return false;
+		}
+
+		return true;
+	}
+}
