@@ -1,0 +1,32 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        // Your Code Here
+		Scanner sc=new Scanner(System.in);
+		String s=sc.next();
+		int count=0;
+		for(int i=0;i<s.length();i++){
+			for(int j=i+1;j<=s.length();j++){
+				String tmp=s.substring(i,j);
+				if(isPalindromic(tmp,0,tmp.length()-1)){
+					count++;
+				}
+			}
+		}
+		System.out.println(count);
+    }
+
+	public static boolean isPalindromic(String tmp,int start,int end){
+		if(start>=end){
+			return true;
+
+		}
+		if(tmp.charAt(start)==tmp.charAt(end)){
+			return isPalindromic(tmp,++start,--end);
+		}
+
+		else{
+			return false;
+		}
+	}
+}
